@@ -8,14 +8,12 @@ class Agent(object):
 
     def next_decision(self, previous_series):
         best_index = self.get_best_strategy()
-        #print "best",self.strategies[best_index].score
-        #print "last",self.strategies[-1].score
         if self.strategies[best_index].get_score() < 0 and self.grand_canoical:
             return 0
         return self.strategies[best_index].next_decision(previous_series)
 
     def get_best_strategy(self):
-        self.strategies.sort(key=lambda x:x.get_score(),reverse= True)
+        self.strategies.sort(key=lambda x: x.get_score(), reverse=True)
         last = self.strategies[0].get_score()
         score = self.strategies[0].get_score()
 
