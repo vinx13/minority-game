@@ -34,13 +34,12 @@ class MinorityGame(object):
 
     def next_step(self):
         self.collect_decisions()
-        self.record_current_status()
-        self.update_agents()
-        self.update_previous_seires(self.get_winning_decision())
+        winning_decision = self.record_current_status()
+        self.update_agents(winning_decision)
+        self.update_previous_seires(winning_decision)
 
-    def update_agents(self):
+    def update_agents(self, winning_decision):
         # update score of all strategies of all agents
-        winning_decision = self.get_winning_decision()
         for agent in self.agents:
             agent.update_strategies(self.previous_series, winning_decision)
         return winning_decision
@@ -49,7 +48,7 @@ class MinorityGame(object):
         self.winning_decisions.append(self.get_winning_decision())
         self.minority_decisions.append(self.get_minority_decision())
         self.predictions.append(self.get_majority_decision())
-
+        return self.winning_decisions[-1]
     def collect_decisions(self):
         # collect decisions of all agents and append to self.decisions
         choices = [0, 0, 0]  # 0: skip this step if in GCMG, 1: choose side one 2: choose side zero
