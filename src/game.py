@@ -49,6 +49,7 @@ class MinorityGame(object):
         self.minority_decisions.append(self.get_minority_decision())
         self.predictions.append(self.get_majority_decision())
         return self.winning_decisions[-1]
+
     def collect_decisions(self):
         # collect decisions of all agents and append to self.decisions
         choices = [0, 0, 0]  # 0: skip this step if in GCMG, 1: choose side one 2: choose side zero
@@ -108,7 +109,11 @@ class MinorityGame(object):
 
 
 if __name__ == '__main__':
-    mg = MinorityGame(n=100, m=8, s=4, t=1000, grand_canonical=True)
+    n = 100
+    m = 10
+    s = 4
+    t = 10000
+    mg = MinorityGame(n=n, m=m, s=s, t=t, grand_canonical=False)
     mg.run()
     mg.plot()
     mg.print_result()
